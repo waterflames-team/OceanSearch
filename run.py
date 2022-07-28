@@ -27,12 +27,12 @@ class APIHandler(tornado.web.RequestHandler):  # 主api进程
         """
         数据引入
         """
-        a = self.get_argument('module', None)  # 必须的module项
+        text = self.get_argument('q', None)  # 必须的module项
 
         """
         判定
         """
-        if a == "test":
+        if text == "test":
             ex = {
                 "state": 200,
                 "data": True,
