@@ -1,11 +1,7 @@
-### 相关的Issue
+> 请在提交PR前自行确认您的提交信息是否符合提交信息规范：
+> [https://xykong.feishu.cn/wiki/wikcnhQ6Eti6VZQI2avsLTSofve](https://xykong.feishu.cn/wiki/wikcnhQ6Eti6VZQI2avsLTSofve)
+
+# 请简要描述你变更了什么内容？
 
 
-### 原因（目的、解决的问题等）
-
-
-### 描述（做了什么，变更了什么）
-
-
-### 测试用例（新增、改动、可能影响的功能）
-
+# 请简要介绍你更改的代码的作用
