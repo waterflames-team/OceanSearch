@@ -5,7 +5,7 @@ import tornado.ioloop
 import tornado.web
 import platform
 
-from core import bili
+from core import bili, gitee
 
 WhatOs = platform.system()
 
@@ -36,25 +36,22 @@ class APIHandler(tornado.web.RequestHandler):  # 主api进程
         """
         视频
         """
-        if tm == "video":
+        if tm == "bili":
             ex = {"code": 0,
                   "title": str(bili.search(tq, tn, "title")),
                   "arcurl": "https://www.bilibili.com/video/"+str(bili.search(tq, tn, "bvid")),
                   "author": str(bili.search(tq, tn, "author")),
                   "pic": str(bili.search(tq, tn, "pic")),
                   }
+        if tm == "gitee":
+            ex = {"code": 0,
+                  "name": str(gitee.search(tq, tn, "human_name")),
+                  "arcurl": "https://gitee.com/"+str(gitee.search(tq, tn, "full_name")),
+                  "description": str(gitee.search(tq, tn, "escription")),
+                  }
         else:
             ex = {"code": 1, "text": tq, "model": tm, "num": tn}
         self.write(ex)
-
-        # 中文转Unicode编码
-        text = "中国"
-
-        res = text.encode("unicode_escape")
-
-        # 输出结果
-        res = b'\\u4e2d\\u56fd'
-
 
 settings = {
     "cookie_secret": "__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
