@@ -3,8 +3,9 @@
 """
 import tornado.ioloop
 import tornado.web
-import json
 import platform
+
+from core import bili
 
 WhatOs = platform.system()
 
@@ -27,21 +28,32 @@ class APIHandler(tornado.web.RequestHandler):  # 主api进程
         """
         数据引入
         """
-        text = self.get_argument('q', None)  # 必须的module项
+        tq = self.get_argument('q', None)  # 搜索内容
+        tm = self.get_argument('m', None)  # 类型
+        tn = self.get_argument('n', None)  # 索引顺序
+        tn = int(tn)
 
         """
-        判定
+        视频
         """
-        if text == "test":
-            ex = {
-                "state": 200,
-                "data": True,
-            }
+        if tm == "video":
+            ex = {"code": 0,
+                  "title": str(bili.search(tq, tn, "title")),
+                  "arcurl": "https://www.bilibili.com/video/"+str(bili.search(tq, tn, "bvid")),
+                  "author": str(bili.search(tq, tn, "author")),
+                  "pic": str(bili.search(tq, tn, "pic")),
+                  }
         else:
-            ex = {
-                "error": None
-            }
+            ex = {"code": 1, "text": tq, "model": tm, "num": tn}
         self.write(ex)
+
+        # 中文转Unicode编码
+        text = "中国"
+
+        res = text.encode("unicode_escape")
+
+        # 输出结果
+        res = b'\\u4e2d\\u56fd'
 
 
 settings = {
