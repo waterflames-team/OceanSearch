@@ -8,7 +8,7 @@ def search(text, number, which):
     params = {"q": text}
 
     res = requests.get(url=url, params=params)
-    res =  res.text
+    res = res.text
     res = json.loads(res)
 
     '''
@@ -21,7 +21,6 @@ def search(text, number, which):
     '''
     res = res[number][which]
     return res
+#TODO KeyError: 'escription'
 
 # https://gitee.com/api/v5/swagger#/getV5SearchRepositories
-
-print(search("RingRobotX",1,1))

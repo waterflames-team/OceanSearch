@@ -8,7 +8,7 @@ def search(text, number, which):
     params = {"keyword": text}
 
     res = requests.get(url=url, params=params)
-    res =  res.text
+    res = res.text
     res = json.loads(res)
 
     code = res["code"]
